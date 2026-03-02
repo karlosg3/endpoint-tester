@@ -1,4 +1,4 @@
-import codeLogo from '../../assets/Code.svg'
+import codeLogo from '../../../assets/Code.svg'
 
 function Header() {
     return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import codeLogo from '../../assets/Code.svg'
 import './Home.css'
-import '../../components/layout/header'
+import '../../components/layout/header/header'
 
 function Home() {
   const [count, setCount] = useState(0)

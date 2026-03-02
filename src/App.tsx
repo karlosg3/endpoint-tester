@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './views/Home/Home'
-import Header from './components/layout/header'
+import Error from './views/Error/Error'
+import Header from './components/layout/header/header'
 import './App.css'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Route path='/' element={<Home />} />
         {/*<Route path='/tester' element={<Tester />} />*/}
         {/*<Route path='/docs' element={<Documentation />} />*/}
+        <Route path ='*' element={<Error />} />
       </Routes>
     </>
   )
