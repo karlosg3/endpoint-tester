@@ -3,11 +3,12 @@
     justify-content: space-between;
     align-items: center;
     height: 5em;
-    width: 100%;
-    padding: 0 32px;
+    width: 100vw;
     background: #131414;
     color: #e3e3e3;
     position: sticky;
+    left: 0;
+    right: 0;
     top: 0;
     z-index: 100;
 }
@@ -15,6 +16,7 @@
 .left-header {
     display: flex;
     align-items: center;
+    padding-left: 2em;
 }
 
 .logo-link {
@@ -38,6 +40,7 @@
 .nav-header {
     display: flex;
     gap: 2rem;
+    padding-right: 2em;
 }
 
 .nav-link-header {

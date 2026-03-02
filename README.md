@@ -84,3 +84,13 @@ pnpm build
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
+
+## 👥 Contributors
+
+A huge thanks to the people who have helped build this tool:
+
+- **@K4** - UI/UX Designer
+- **@SerevrGG** - Front-End Developer
+- **@DazeChr** - Full-Stack Developer
+
+---
