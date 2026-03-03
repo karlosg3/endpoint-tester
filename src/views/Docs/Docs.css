@@ -1,0 +1,167 @@
+.doc-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  width: 100vw;
+  
+  /* 1. Force the container to take up a specific height */
+  height: calc(100vh - 80px); /* Adjust '80px' based on your Navbar height */
+  
+  /* 2. Force the scrollbar to appear inside this container */
+  overflow-y: scroll; 
+  
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+}
+
+.doc-content {
+  display: block; /* Overrides any global flex */
+  text-align: left; /* Forces text to align left, fixing the weird centering */
+  width: 100%;
+  max-width: 800px; /* Constrains width for readability */
+}
+
+/* Force left alignment on all text elements inside doc-content to override globals */
+.doc-content h1, 
+.doc-content h2, 
+.doc-content h3, 
+.doc-content p, 
+.doc-content li {
+  text-align: left;
+}
+
+.doc-header {
+  font-size: 4rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+.doc-header:hover {
+  filter: drop-shadow(0 0 1em #8b8b8baa);
+}
+
+.accent-blue {
+  color: #3292f2; /* Matches DARO blue */
+}
+
+.doc-separator {
+  border: 1px solid #d4d3d3;
+  border-radius: 6px;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  opacity: 0.5;
+  box-shadow: white 0px 0px 10px;
+}
+
+.bottom-separator {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.doc-intro {
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  margin-bottom: 3rem;
+  color: #d4d3d3;
+}
+
+.doc-section {
+  margin-bottom: 3.5rem;
+  width: 100%;
+}
+
+.doc-section h2 {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.doc-section h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-section p {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: #d4d3d3;
+  margin-bottom: 1rem;
+}
+
+/* List Styling Fixes */
+.doc-list, .sub-list, .checklist {
+  display: block;
+  margin: 0 0 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.doc-list li, .sub-list li {
+  display: list-item;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: #d4d3d3;
+  margin-bottom: 0.5rem;
+}
+
+.sub-list {
+  list-style-type: circle;
+  margin-top: 0.5rem;
+}
+
+/* Inline code formatting */
+code {
+  background-color: #1e1e1e;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #5ce6cd; /* Slightly teal to pop against dark mode */
+  font-size: 1.1rem;
+}
+
+/* Code Block Formatting */
+.code-block {
+  background-color: #121212; /* Darker bg for contrast */
+  border-left: 4px solid #3292f2; /* DARO Blue accent */
+  padding: 1.2rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.code-block p {
+  margin: 0 0 0.5rem 0;
+  color: #8b8b8b;
+  font-size: 1rem;
+}
+
+.code-block code {
+  background-color: transparent;
+  padding: 0;
+  color: #e0e0e0;
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
+}
+
+.checklist {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.license-text {
+  text-align: center !important;
+  color: #8b8b8b;
+  font-size: 1rem;
+}
