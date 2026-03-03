@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './footer.css'
 
 const messages = [
-    "© 2026 ARO Endpoint Tester. All rights reserved.",
+    "© 2026 DARO Endpoint Tester. All rights reserved.",
     "See what is new for the v0.0.5 release!",
     "Visit La Terraza Restaurant Bar in Cananea, Sonora, Mexico for a great time!",
     "Visit my GitHub profile for more projects: github.com/karlosg3",

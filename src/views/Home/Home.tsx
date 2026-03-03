@@ -1,14 +1,34 @@
-import { useState } from 'react'
 import codeLogo from '../../assets/Code.svg'
 import './Home.css'
 import '../../components/layout/header/header'
+import { Link } from 'react-router-dom'
 
 function Home() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
+    <div className='home-container'>
+      <div className='main-display'>
+        <div className='logo-container'>
+          <Link to='https://github.com/karlosg3/endpoint-tester' className='link-logo'>
+            <img src={codeLogo} className='logo' alt='Code Logo' />
+          </Link>
+        </div>
+        <div className='separator' />
+        <div className='info-container'>
+          <h1 className='info-header'><span className='info-span'>DARO</span> Endpoint Tester</h1>
+          <div className='info-separator' />
+          <p className='info-text'>
+            This repo is a simple endpoint tester created by the DARO team.
+            It is built with React and Vite. You can find the source code on
+            our GitHub repository by clicking on the Code Logo aside. All you
+            need to do is fill the Text Box with your endpoint and click the
+            button to test it. The response will be displayed below the button.
+          </p>
+        </div>
+      </div>
+    </div>
+      {/* <div>
         <a href="https://github.com/karlosg3/endpoint-tester" target="_blank">
           <img src={codeLogo} className="logo" alt="Code logo" />
         </a>
@@ -30,7 +50,7 @@ function Home() {
       </div>
       <p className="read-the-docs">
         Click on the Code Logo to visit the GitHub repository.
-      </p>
+      </p> */}
     </>
   )
 }

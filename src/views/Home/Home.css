@@ -1,49 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  width: 100vw;
 }
 
-.logo {
-  height: 16em;
-  padding: 0em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.main-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -2rem;
+  height: 100%;
+  width: 100vw;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 35%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.separator {
+  border: 1px solid #d4d3d3;
+  border-radius: 6px;
+  margin-right: 5rem;
+  height: 40%;
+  opacity: 0.5;
+  box-shadow: white 0px 0px 20px;
 }
 
-.card {
-  padding: 2em;
+.info-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 50%;
+}
+
+.link-logo {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+img.logo {
+  height: 35rem;
+  width: auto;
+  padding-top: 5rem;
+  text-shadow: black 0px 0px 20px;
 }
 
-p {
-  width: 20rem;
+img.logo:hover {
+  filter: drop-shadow(0 0 1em #8b8b8baa);
+}
+
+.info-header {
+  font-size: 6rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+  transition: 0.5s ease;
+}
+
+.info-header:hover {
+  filter: drop-shadow(0 0 1em #8b8b8baa);
+}
+
+.info-separator {
+  border: 1px solid #d4d3d3;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  width: 90%;
+  opacity: 0.5;
+  box-shadow: white 0px 0px 20px;
+}
+
+.info-text {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  text-align: justify;
+  width: 90%;
 }
