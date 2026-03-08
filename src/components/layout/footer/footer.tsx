@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
 import './footer.css'
 
-const messages = [
-    "© 2026 DARO Endpoint Tester. All rights reserved.",
-    "See what is new for the v0.0.5 release!",
-    "Visit La Terraza Restaurant Bar in Cananea, Sonora, Mexico for a great time!",
-    "Visit my GitHub profile for more projects: github.com/karlosg3",
-    "Visit the Bunker Breakfast and Lunch in Hermosillo, Sonora, Mexico for delicious food!",
-    "'Prohibieron los corridos y ahora todos quieren ser un $ad Boy' - DEPR<3$$ED MFKZ",
+interface FooterMessage {
+    text: string;
+    url?: string;
+}
+
+const messages: FooterMessage[] = [
+    { text: `© 2026 DARO Endpoint Tester. v${APP_VERSION} All rights reserved.` },
+    { text: `See what is new for the v${APP_VERSION} release!`, url: "https://github.com/karlosg3/endpoint-tester/releases" },
+    { text: "Visit La Terraza Restaurant Bar in Cananea, Sonora, Mexico for a great time!", url: "https://www.instagram.com/laterrazzarestaurante_/" },
+    { text: "Visit my GitHub profile for more projects: github.com/karlosg3", url: "https://github.com/karlosg3" },
+    { text: "Visit the Bunker Breakfast and Lunch in Hermosillo, Sonora, Mexico for delicious food!" },
+    { text: "'Prohibieron los corridos y ahora todos quieren ser un $ad Boy' - DEPR<3$$ED MFKZ", url: "https://open.spotify.com/intl-es/album/3VVqkkiUqVklgPcC4dnYos?si=6LL2M-XiS8eNHTS4vo_sMQ"},
 ]
 
 export default function Footer() {
@@ -25,9 +30,24 @@ export default function Footer() {
         return () => clearInterval(interval);
     }, []);
 
+    const currentMessage = messages[index];
+
     return (
         <footer className='footer'>
-            <span className={`footer-message ${fade ? 'fade-in' : 'fade-out'}`}>{messages[index]}</span>
+            <span className={`footer-message ${fade ? 'fade-in' : 'fade-out'}`}>
+                {currentMessage.url ? (
+                    <a 
+                        href={currentMessage.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ color: 'inherit', textDecoration: 'none' }}
+                    >
+                        {currentMessage.text}
+                    </a>
+                ) : (
+                    currentMessage.text
+                )}
+            </span>
         </footer>
     )
 }

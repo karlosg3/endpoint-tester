@@ -88,7 +88,11 @@ export default function RequestPanel({
           value={activeTab?.url ?? ''}
           onChange={(e) => {
             if (!activeTab) return;
-            onUpdateTab(activeTab.id, { url: e.target.value });
+            const newUrl = e.target.value;
+            onUpdateTab(activeTab.id, { url: newUrl });
+            if (activeTab.label === 'New Tab' || activeTab.label === activeTab.url) {
+              onUpdateTab(activeTab.id, { label: newUrl });
+            }
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') onSend();

@@ -125,6 +125,7 @@ export default function Tester() {
           onTabSwitch={handleTabSwitch}
           onCloseTab={closeTab}
           onCreateTab={createTab}
+          onUpdateTab={updateTab}
         />
         
         <div className='tester-workspace'>
