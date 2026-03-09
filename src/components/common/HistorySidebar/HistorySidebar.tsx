@@ -5,6 +5,7 @@ import './HistorySidebar.css';
 interface HistorySidebarProps {
   isOpen: boolean;
   entries: HistoryEntry[];
+  allEntries: HistoryEntry[];
   savedEntries: SavedEndpoint[];
   onClear: () => void;
   onReplay: (id: string) => void;
@@ -19,6 +20,7 @@ interface HistorySidebarProps {
 export default function HistorySidebar({
   isOpen,
   entries,
+  allEntries,
   savedEntries,
   onClear,
   onReplay,
@@ -26,10 +28,12 @@ export default function HistorySidebar({
   onDelete,
   onDeleteSaved,
   getStatusCategory,
-  formatTimestamp,
   onToggle,
 }: HistorySidebarProps) {
   const [activeTab, setActiveTab] = useState<'history' | 'saved'>('history');
+  const [historyFilter, setHistoryFilter] = useState<'tab' | 'all'>('tab');
+
+  const displayEntries = historyFilter === 'tab' ? entries : allEntries;
 
   return (
     <div 
@@ -77,12 +81,29 @@ export default function HistorySidebar({
           </div>
         </div>
 
+        {activeTab === 'history' && isOpen && (
+          <div className='history-filter-bar'>
+            <button 
+              className={`filter-btn ${historyFilter === 'tab' ? 'active' : ''}`}
+              onClick={(e) => { e.stopPropagation(); setHistoryFilter('tab'); }}
+            >
+              This Tab
+            </button>
+            <button 
+              className={`filter-btn ${historyFilter === 'all' ? 'active' : ''}`}
+              onClick={(e) => { e.stopPropagation(); setHistoryFilter('all'); }}
+            >
+              All History
+            </button>
+          </div>
+        )}
+
         <div className='history-list'>
           {activeTab === 'history' ? (
-            entries.length === 0 ? (
+            displayEntries.length === 0 ? (
               <p className='history-empty'>No history yet.</p>
             ) : (
-              entries.map((entry) => (
+              displayEntries.map((entry) => (
                 <div
                   key={entry.id}
                   className='history-entry'

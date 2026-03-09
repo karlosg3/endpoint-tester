@@ -151,6 +151,7 @@ export default function Tester() {
       <HistorySidebar
         isOpen={historyOpen}
         entries={tabHistory}
+        allEntries={history}
         savedEntries={savedEndpoints}
         onClear={handleClearHistory}
         onReplay={handleReplay}
