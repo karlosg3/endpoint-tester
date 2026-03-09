@@ -61,6 +61,37 @@
   border-bottom: 1px solid #2a2a2a;
 }
 
+.history-filter-tabs {
+  display: flex;
+  padding: 0.5em;
+  gap: 0.25em;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.history-filter-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #8b8b8b;
+  padding: 0.35em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.history-filter-btn:hover {
+  background: #252525;
+  color: #e3e3e3;
+}
+
+.history-filter-btn.active {
+  background: #2a2a2a;
+  color: #2F86D8;
+}
+
 .header-actions {
   display: flex;
   gap: 0.5em;
@@ -83,6 +114,13 @@
   flex: 1;
   overflow-y: auto;
   padding: 0.5em;
+}
+
+.history-empty {
+  text-align: center;
+  color: #8b8b8b;
+  font-size: 0.85rem;
+  margin-top: 2em;
 }
 
 .history-entry {

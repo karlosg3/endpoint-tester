@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { type HttpMethod, getMethodColor, type Tab } from '../../../utils/storage';
 import './RequestPanel.css';
 
@@ -9,6 +9,7 @@ interface RequestPanelProps {
   isLoading: boolean;
   onToggleHistory: () => void;
   historyOpen: boolean;
+  // import handleSend: () => void
 }
 
 export default function RequestPanel({
@@ -21,6 +22,16 @@ export default function RequestPanel({
 }: RequestPanelProps) {
   const [requestTab, setRequestTab] = useState<'headers' | 'body'>('headers');
   const BODY_METHODS = ['POST', 'PUT', 'PATCH'] as HttpMethod[];
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent): void {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        onSend()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [activeTab, isLoading]);
 
   function handleAddHeader(): void {
     if (!activeTab) return;
@@ -102,6 +113,7 @@ export default function RequestPanel({
           className={`send-btn ${isLoading ? 'loading' : ''}`}
           onClick={onSend}
           disabled={isLoading || !activeTab?.url.trim()}
+          title='Send Request (Ctrl+Enter)'
         >
           {isLoading ? 'Sending...' : 'Send'}
         </button>

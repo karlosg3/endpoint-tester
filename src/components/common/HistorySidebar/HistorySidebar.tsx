@@ -4,9 +4,11 @@ import './HistorySidebar.css';
 interface HistorySidebarProps {
   isOpen: boolean;
   entries: HistoryEntry[];
+  showGlobal: boolean;
   onClear: () => void;
   onReplay: (id: string) => void;
   onDelete: (id: string) => void;
+  onToggleGlobal: (show: boolean) => void;
   getStatusCategory: (status: number) => string;
   formatTimestamp: (timestamp: string) => string;
   onToggle: () => void;
@@ -15,11 +17,12 @@ interface HistorySidebarProps {
 export default function HistorySidebar({
   isOpen,
   entries,
+  showGlobal,
   onClear,
   onReplay,
   onDelete,
+  onToggleGlobal,
   getStatusCategory,
-  formatTimestamp,
   onToggle,
 }: HistorySidebarProps) {
   return (
@@ -52,6 +55,28 @@ export default function HistorySidebar({
             </button>
           </div>
         </div>
+
+        <div className='history-filter-tabs'>
+          <button 
+            className={`history-filter-btn ${!showGlobal ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleGlobal(false);
+            }}
+          >
+            Tab
+          </button>
+          <button 
+            className={`history-filter-btn ${showGlobal ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleGlobal(true);
+            }}
+          >
+            Global
+          </button>
+        </div>
+
         <div className='history-list'>
           {entries.length === 0 ? (
             <p className='history-empty'>No history yet.</p>

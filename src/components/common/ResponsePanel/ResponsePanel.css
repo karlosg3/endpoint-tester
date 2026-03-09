@@ -71,3 +71,20 @@
   font-size: 0.85rem;
   font-family: monospace;
 }
+
+.pretty-toggle {
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #8b8b8b;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-left: auto;
+}
+
+.pretty-toggle:hover {
+  color: #2F86D8;
+  border-color: #2F86D8;
+}

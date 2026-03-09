@@ -23,6 +23,7 @@ export default function Tester() {
     history,
     addEntry,
     clearHistory,
+    clearHistoryByTab,
     deleteEntry,
     replayRequest,
     getHistoryByTab,
@@ -32,9 +33,11 @@ export default function Tester() {
   
   const { response, isLoading, executeRequest, clearResponse } = useRequest();
   const [historyOpen, setHistoryOpen] = useState<boolean>(false);
+  const [showGlobalHistory, setShowGlobalHistory] = useState<boolean>(false);
   
   const activeTab = getActiveTab();
   const tabHistory = activeTab ? getHistoryByTab(activeTab.id) : [];
+  const displayHistory = showGlobalHistory ? history : tabHistory;
 
   function validateUrl(url: string): boolean {
     try {
@@ -93,12 +96,21 @@ export default function Tester() {
   }
 
   function handleClearHistory(): void {
-    toast.warning('Are you sure you want to clear all history?', {
+    const isGlobal = showGlobalHistory;
+    const message = isGlobal 
+      ? 'Are you sure you want to clear all history?' 
+      : 'Are you sure you want to clear history for this tab?';
+
+    toast.warning(message, {
       description: 'This action cannot be undone.',
       action: {
         label: 'Clear',
         onClick: () => {
-          clearHistory();
+          if (isGlobal) {
+            clearHistory();
+          } else if (activeTab) {
+            clearHistoryByTab(activeTab.id);
+          }
           toast.success('History cleared successfully');
         },
       },
@@ -109,10 +121,12 @@ export default function Tester() {
     <div className='tester-container'>
       <HistorySidebar
         isOpen={historyOpen}
-        entries={tabHistory}
+        entries={displayHistory}
+        showGlobal={showGlobalHistory}
         onClear={handleClearHistory}
         onReplay={handleReplay}
         onDelete={deleteEntry}
+        onToggleGlobal={setShowGlobalHistory}
         getStatusCategory={getStatusCategory}
         formatTimestamp={formatTimestamp}
         onToggle={() => setHistoryOpen(prev => !prev)}
