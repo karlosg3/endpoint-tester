@@ -69,7 +69,7 @@ export default function ResponsePanel({
                 ? "Network Error"
                 : `${response.status} ${response.statusText}`}
             </span>
-            <span className="response-time">{response.responseTime}ms</span>
+            <span className="response-time">{Math.round(response.responseTime)} ms</span>
             {!response.isError && (
               <>
                 {typeof response.data !== "string" && (

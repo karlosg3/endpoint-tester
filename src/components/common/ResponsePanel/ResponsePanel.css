@@ -46,6 +46,7 @@
   color: #e3e3e3;
   white-space: pre-wrap;
   word-break: break-all;
+  text-align: left;
 }
 
 .response-body::-webkit-scrollbar {
