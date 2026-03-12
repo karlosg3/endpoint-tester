@@ -1,3 +1,4 @@
+/* ─── Editor Component ───────────────────────────────── */
 .editor-container {
   display: flex;
   position: relative;
@@ -11,6 +12,11 @@
   font-size: 13px;
   line-height: 20px;
   overflow: hidden;
+  text-align: left;
+}
+
+.editor-container:focus-within {
+  border-color: #2F86D8;
 }
 
 .editor-gutter {
@@ -34,7 +40,8 @@
   box-sizing: border-box;
 }
 
-.editor-textarea {
+
+.editor-content {
   flex: 1;
   padding: 10px;
   border: none;
@@ -43,37 +50,63 @@
   margin: 0;
   white-space: pre;
   overflow-x: auto;
+  overflow-y: auto;
   color: #e3e3e3;
   background-color: transparent;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   box-sizing: border-box;
+  word-break: normal;
+  word-wrap: normal;
 }
 
-.editor-textarea::placeholder {
+.editor-content:empty:before {
+  content: attr(data-placeholder);
   color: #444;
 }
 
-.editor-container:focus-within {
-  border-color: #2F86D8;
+/* ─── Syntax Highlighting para JSON ─────────────────── */
+.json-editor .json-key {
+  color: #2F86D8;        /* Azul para keys/propiedades */
+  font-weight: bold;
 }
 
-/* Custom scrollbar for the textarea */
-.editor-textarea::-webkit-scrollbar {
+.json-editor .json-string {
+  color: #ce9178;        /* Naranja/marrón para strings */
+}
+
+.json-editor .json-number {
+  color: #b5cea8;        /* Verde para números */
+}
+
+.json-editor .json-boolean {
+  color: #569cd6;        /* Azul claro para booleanos */
+}
+
+.json-editor .json-null {
+  color: #569cd6;        /* Azul claro para null */
+}
+
+/* ─── Scrollbars personalizadas ─────────────────────── */
+.editor-content::-webkit-scrollbar,
+.editor-gutter::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.editor-textarea::-webkit-scrollbar-track {
+.editor-content::-webkit-scrollbar-track,
+.editor-gutter::-webkit-scrollbar-track {
   background: #1a1a1a;
 }
 
-.editor-textarea::-webkit-scrollbar-thumb {
+.editor-content::-webkit-scrollbar-thumb,
+.editor-gutter::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 4px;
 }
 
-.editor-textarea::-webkit-scrollbar-thumb:hover {
+.editor-content::-webkit-scrollbar-thumb:hover,
+.editor-gutter::-webkit-scrollbar-thumb:hover {
   background: #444;
 }

@@ -133,6 +133,7 @@ export default function ResponsePanel({
               <Editor
                 value={responseBody}
                 readOnly={true}
+                 language={prettyPrint && typeof response.data !== "string" ? "json" : "text"}
               />
             </div>
           ) : (

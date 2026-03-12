@@ -125,7 +125,7 @@ export default function HistorySidebar({
                       <span className={`status-badge ${getStatusCategory(entry.responseStatus)}`}>
                         {entry.responseStatus || 'ERR'}
                       </span>
-                      <span>{entry.responseTime}ms</span>
+                      <span>{Math.round(entry.responseTime)} ms</span>
                     </div>
                   </div>
                   <button
