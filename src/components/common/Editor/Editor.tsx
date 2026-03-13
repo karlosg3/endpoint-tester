@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import './Editor.css';
 
 interface EditorProps {
@@ -18,19 +18,24 @@ export default function Editor({
 }: EditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const gutterRef = useRef<HTMLDivElement>(null);
-  const [isInternalChange, setIsInternalChange] = useState(false);
 
   const lines = value.split('\n');
   const lineCount = Math.max(lines.length, 1);
 
-  // Función para hacer syntax highlighting de JSON - memoizada con useCallback
+  // Función para hacer syntax highlighting de JSON
   const highlightJSON = useCallback((json: string): string => {
     if (!json.trim()) return json;
     
     try {
+      // Intentamos parsear para validar si es JSON válido
       JSON.parse(json);
       
-      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, 
+      // Si es válido, aplicamos el resaltado con spans
+      return json
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, 
         (match) => {
           if (match.endsWith(':')) {
             const key = match.slice(0, -1).trim();
@@ -48,6 +53,7 @@ export default function Editor({
         }
       );
     } catch {
+      // Si no es válido (ej. durante la escritura de un "typo"), devolvemos texto escapado plano
       return json
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -68,8 +74,8 @@ export default function Editor({
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     if (readOnly || !onChange) return;
     
+    // Al usar textContent obtenemos el texto limpio sin los tags HTML del resaltado
     const newValue = e.currentTarget.textContent || '';
-    setIsInternalChange(true);
     onChange(newValue);
   };
 
@@ -82,26 +88,37 @@ export default function Editor({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Tab') {
       e.preventDefault();
+      // Insertar dos espacios en lugar de un tabulador real
       document.execCommand('insertText', false, '  ');
     }
   };
 
+  // Efecto para sincronizar el valor externo con el DOM interno
   useEffect(() => {
-    if (!isInternalChange && editorRef.current) {
-      const highlighted = getHighlightedHTML();
-      editorRef.current.innerHTML = highlighted || '<br>';
+    if (editorRef.current) {
+      // IMPORTANTE: Solo actualizamos innerHTML si el texto ha cambiado realmente desde el exterior.
+      // Si el texto en el DOM ya coincide con 'value', no tocamos innerHTML para evitar perder el cursor.
+      if (editorRef.current.textContent !== value) {
+        const highlighted = getHighlightedHTML();
+        editorRef.current.innerHTML = highlighted || '<br>';
+      }
     }
-  }, [value, language, getHighlightedHTML, isInternalChange]);
+  }, [value, getHighlightedHTML]);
 
+  // Efecto separado para manejar cambios de lenguaje o inicialización que requieran refrescar el resaltado
+  // sin necesariamente haber cambiado el texto plano.
   useEffect(() => {
-    if (isInternalChange) {
-      const frameId = requestAnimationFrame(() => {
-        setIsInternalChange(false);
-      });
-      
-      return () => cancelAnimationFrame(frameId);
+    if (editorRef.current) {
+      const highlighted = getHighlightedHTML();
+      // Solo forzamos la actualización si el HTML actual es diferente del que debería ser.
+      // Esto ocurrirá al cambiar el prop 'language' o al cargar el componente.
+      if (editorRef.current.innerHTML !== highlighted && (editorRef.current.innerHTML || highlighted)) {
+        // Nota: Si el usuario está escribiendo, esto podría causar un salto de cursor,
+        // pero el cambio de lenguaje suele ser una acción externa.
+        editorRef.current.innerHTML = highlighted || '<br>';
+      }
     }
-  }, [isInternalChange]);
+  }, [language, getHighlightedHTML]); // Solo re-re-resaltar si cambia el lenguaje o el resaltado de base
 
   return (
     <div className="editor-container">

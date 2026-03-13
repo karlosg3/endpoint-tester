@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 const navLinks = [
     { name: 'Tester', path: '/tester' },
     { name: 'Documentation', path: '/docs' },
-    { name: 'GitHub', path: 'https://github.com/karlosg3/endpoint-tester', external: true },
+    { name: 'GitHub', path: 'https://github.com/ARO-Software-Development/endpoint-tester', external: true },
 ];
 
 const pageTitles: Record<string, string> = {
